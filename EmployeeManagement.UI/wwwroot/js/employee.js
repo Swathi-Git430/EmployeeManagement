@@ -82,7 +82,7 @@ function bindEvents() {
 
         var employeeDetailedViewModel = {};
 
-        employeeDetailedViewModel.Id = Number$("#updateId").val();
+        employeeDetailedViewModel.Id = Number($("#updateId").val());
         employeeDetailedViewModel.Name = $("#updateName").val();
         employeeDetailedViewModel.Department = $("#updateDept").val();
         employeeDetailedViewModel.Age = Number($("#updateAge").val());
