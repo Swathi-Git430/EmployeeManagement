@@ -71,40 +71,62 @@ function bindEvents() {
             success: function (result) {
 
                 location.reload();
+                
             },
             error: function (error) {
                 console.log(error);
             }
         });
+        alert("Created Successfully")
     });
 
-    $("#updateform").submit(function (event) {
-
-        var employeeDetailedViewModel = {};
-
-        employeeDetailedViewModel.Id = Number($("#updateId").val());
-        employeeDetailedViewModel.Name = $("#updateName").val();
-        employeeDetailedViewModel.Department = $("#updateDept").val();
-        employeeDetailedViewModel.Age = Number($("#updateAge").val());
-        employeeDetailedViewModel.Address = $("#updateAddress").val();
-
-        var data = JSON.stringify(employeeDetailedViewModel);
+    $(".employeeEdit").on("click", function (event) {
+        var employeeId = event.currentTarget.getAttribute("data-id");
 
         $.ajax({
-            url: "https://localhost:6001/api/internal/employee/update",
-            type: 'PUT',
-            dataType: 'json',
+            url: 'https://localhost:6001/api/internal/employee/get-employees/' + employeeId,
+            type: 'GET',
             contentType: "application/json; charset=utf-8",
-            data: data,
             success: function (result) {
-
-                location.reload();
+                $("#updateId").val(result.id)
+                $("#updateName").val(result.name)
+                $("#updateDept").val(result.department)
+                $("#updateAge").val(result.age)
+                $("#updateAddress").val(result.address)
             },
             error: function (error) {
                 console.log(error);
             }
         });
-    });    
+        $("#updateform").submit(function (event) {
+
+            var employeeDetailedViewModel = {};
+
+            employeeDetailedViewModel.Id = Number($("#updateId").val());
+            employeeDetailedViewModel.Name = $("#updateName").val();
+            employeeDetailedViewModel.Department = $("#updateDept").val();
+            employeeDetailedViewModel.Age = Number($("#updateAge").val());
+            employeeDetailedViewModel.Address = $("#updateAddress").val();
+
+            var data = JSON.stringify(employeeDetailedViewModel);
+
+            $.ajax({
+                url: "https://localhost:6001/api/internal/employee/update",
+                type: 'PUT',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+            alert("Updated Successfully")
+        });
+    });   
 }
 
 

@@ -24,25 +24,15 @@ namespace EmployeeManagement.API.Controllers
         [HttpGet]
         [Route("{employeeId}")]
         public IActionResult GetEmployeeById([FromRoute] int employeeId)
-        {
-            try
-            {
+        {          
                 /// get employee by calling GetEmployeeById() in IEmployeeService and store it in a variable and Map that variable to EmployeeDetailedViewModel.                              
                 var getEmployeeById = _employeeService.GetEmployeeById(employeeId);
 
-                return Ok(MapToEmployeeIdDetailedViewModel(getEmployeeById));
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+                return Ok(MapToEmployeeIdDetailedViewModel(getEmployeeById));                       
         }
 
-        private object MapToEmployeeIdDetailedViewModel(EmployeeDto getEmployeeById)
-        {
-            try
-            {
+        private EmployeeDetailedViewModel MapToEmployeeIdDetailedViewModel(EmployeeDto getEmployeeById)
+        {            
                 var employeeDetailedViewModel = new EmployeeDetailedViewModel
                 {
                     Id = getEmployeeById.Id,
@@ -51,13 +41,7 @@ namespace EmployeeManagement.API.Controllers
                     Age = getEmployeeById.Age,
                     Address = getEmployeeById.Address
                 };
-                return employeeDetailedViewModel;
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+                return employeeDetailedViewModel;            
         }
 
         [HttpGet]
@@ -68,7 +52,7 @@ namespace EmployeeManagement.API.Controllers
             return Ok(MapGetEmployee(listOfEmployeeViewModel));
         }
 
-        private object MapGetEmployee(IEnumerable<EmployeeDto> listOfEmployeeViewModel)
+        private IEnumerable<EmployeeDetailedViewModel> MapGetEmployee(IEnumerable<EmployeeDto> listOfEmployeeViewModel)
         {
                 var getEmployee = new List<EmployeeDetailedViewModel>();
                 foreach (var item in listOfEmployeeViewModel)
@@ -89,9 +73,7 @@ namespace EmployeeManagement.API.Controllers
         [HttpPost]
         [Route("insert")]
         public IActionResult InsertEmployee([FromBody] EmployeeDetailedViewModel insertEmployee)
-        {
-            try
-            {
+        {           
                 var isInsertedemployee = _employeeService.InsertEmployee(MapToEmployeeDetailedViewModel(insertEmployee));
                 if (isInsertedemployee)
                 {
@@ -100,12 +82,7 @@ namespace EmployeeManagement.API.Controllers
                 else
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update details");
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+                }            
         }
 
         private EmployeeDto MapToEmployeeDetailedViewModel(EmployeeDetailedViewModel insertEmployee)
@@ -124,25 +101,15 @@ namespace EmployeeManagement.API.Controllers
         [Route("update")]
         public IActionResult UpdateEmployee([FromBody] EmployeeDetailedViewModel updateEmployee)
         {
-            try
+            var isUpdateEmployee = _employeeService.UpdateEmployee(MapUpdateEmployee(updateEmployee));
+
+            if (isUpdateEmployee)
             {
-                var isUpdateEmployee = _employeeService.UpdateEmployee(MapUpdateEmployee(updateEmployee));
-
-                //return Ok(isUpdateEmployee);
-
-                if (isUpdateEmployee)
-                {
-                    return Ok(isUpdateEmployee);
-                }
-                else
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update details");
-                }
+                return Ok(isUpdateEmployee);
             }
-            catch (Exception ex)
+            else
             {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update details");
             }
         }
 
@@ -163,15 +130,8 @@ namespace EmployeeManagement.API.Controllers
         [Route("{id}")]
         public IActionResult DeleteEmployee([FromRoute] int id)
         {
-            try
-            {
                 var deleteEmployee = _employeeService.DeleteEmployee(id);
-                return Ok(deleteEmployee);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+                return Ok(deleteEmployee);            
         }
     }
 }

@@ -3,10 +3,10 @@
 <h1>EMPLOYEE MANAGEMENT SYSTEM</h1>
 <h3>Employee List</h3>
 <button class="btn btn-success" data-toggle="modal" data-target="#myModal"> Create New Employee</button>
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
 
-         
+@*--creation--*@
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">         
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Employee Details</h4>
@@ -14,10 +14,12 @@
             </div>
             <div class="modal-body">
                 <form id="createform">
+                     
                     <label>Name:</label><br>
-                    <input type="text" style="width:100%" required id="name" name="name"><br>
+                    <input type="text" style="width:100%" required id="name" pattern="[A-Za-z/s/.]{1-20}" maxlength="20" name="name"><br>
                     <label>Department:</label><br>                    
                     <select style="width:100%" name="department" required id="dept">
+                        <option value="">--select an option--</option>
                         <option value="HR">HR</option>
                         <option value="Finance">Finance</option>
                         <option value="Accounts">Accounts</option>
@@ -25,9 +27,9 @@
                         <option value="Tester">Tester</option>
                     </select>
                     <label>Age:</label><br>
-                    <input type="number" style="width:100%" required id="age" name="age"><br>
+                    <input type="number" style="width:100%" required id="age" min="18" max="35" name="age"><br>
                     <label>Address:</label><br>
-                    <input type="text" style="width:100%" required id="address" name="address"><br><br><br>
+                    <input type="text" style="width:100%" required id="address" pattern="[A-Za-z/s/,]{1-50}" maxlength="50" name="address"><br><br><br>
                     <button class="btn btn-success" type="submit" value="Create" id="createBtn">Create</button>
                 </form>
 
@@ -38,23 +40,23 @@
     </div>
 </div>
 
+@*--Updation--*@
 <div class="modal fade" id="updatedData" role="dialog">
     <div class="modal-dialog">
-
-
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Employee Details</h4>
+                <h4 class="modal-title">Edit Employee Details</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="updateform">
+                   
                     <label>Id:</label><br>
-                    <input type="number" style="width:100%" id="updateId" name="id"/><br>
+                    <input type="number" style="width:100%" id="updateId" name="id" disabled /><br>
                     <label>Name:</label><br>
-                    <input type="text" style="width:100%" id="updateName" name="name"/><br>
+                    <input type="text" style="width:100%" id="updateName" pattern="[A-Za-z/s/.]{1-20}" maxlength="20" name="name" /><br>
                     <label>Department:</label><br>
-                    <select style="width:100%" name="department" id="updateDept">
+                    <select style="width:100%" name="department" id="updateDept">                        
                         <option value="HR">HR</option>
                         <option value="Finance">Finance</option>
                         <option value="Accounts">Accounts</option>
@@ -62,10 +64,10 @@
                         <option value="Tester">Tester</option>
                     </select>
                     <label>Age:</label><br>
-                    <input type="number" style="width:100%" id="updateAge" name="age"/><br>
+                    <input type="number" style="width:100%" id="updateAge" min="18" max="35" name="age" /><br>
                     <label>Address:</label><br>
-                    <input type="text" style="width:100%" id="updateAddress" name="address"/><br><br><br>
-                    <input type="submit" value="Update"/>
+                    <input type="text" style="width:100%" id="updateAddress" pattern="[A-Za-z/s/,]{1-50}" maxlength="50" name="address" /><br><br><br>
+                    <input type="submit" value="Update" />
                 </form>
 
             </div>
