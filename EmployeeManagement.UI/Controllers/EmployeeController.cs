@@ -26,9 +26,21 @@ namespace EmployeeManagement.UI.Controllers
                 return View(employees);                
             }
             catch (Exception)
-           {
+            {
                 throw;
             }
-        }        
+        }
+
+       /* public IActionResult UpdateEmployee(EmployeeDetailedViewModel updateEmployee)
+        {
+            return View();
+        }
+
+        [HttpPut]
+        public IActionResult UpdateEmployee(EmployeeDetailedViewModel updateEmployee)
+        {
+            var updatedEmployee = _employeeApiClient.UpdateEmployee(updateEmployee);
+            return View(updatedEmployee);
+        }*/
     }
 }

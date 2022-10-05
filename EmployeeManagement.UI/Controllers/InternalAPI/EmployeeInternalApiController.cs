@@ -21,7 +21,7 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
         }
 
         [HttpGet]
-        [Route("{employeeId}")]
+        [Route("get-employees/{employeeId}")]
         public IActionResult GetEmployeeById([FromRoute] int employeeId)
         {
             try
@@ -36,6 +36,57 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
                 throw;
             }
 
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public IActionResult DeleteEmployee([FromRoute] int id)
+        {
+            try
+            {
+                var employee = _employeeApiClient.DeleteEmployee(id);
+
+                return Ok(employee);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public IActionResult UpdateEmployee([FromBody] EmployeeDetailedViewModel updateEmployee)
+        {
+            try
+            {
+                var employee = _employeeApiClient.UpdateEmployee(updateEmployee);
+
+                return Ok(employee);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("insert")]
+        public IActionResult InsertEmployee([FromBody] EmployeeDetailedViewModel insertEmployee)
+        {
+            try
+            {
+                var employee = _employeeApiClient.InsertEmployee(insertEmployee);
+
+                return Ok(employee);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
