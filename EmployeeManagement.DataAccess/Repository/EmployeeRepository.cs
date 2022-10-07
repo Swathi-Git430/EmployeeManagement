@@ -23,7 +23,7 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 _sqlConnection.Open();
 
-                var sqlcommand = new SqlCommand("select * from Employee where Id=@id", _sqlConnection);
+                var sqlcommand = new SqlCommand("exec SP_GetEmployeeById @id", _sqlConnection);
 
                 sqlcommand.Parameters.AddWithValue("id", employeeId);
 
@@ -90,7 +90,7 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 _sqlConnection.Open();
 
-                var sqlcommand = new SqlCommand(cmdText: "insert into Employee(Name, Age, Department, Address) values(@name, @age, @department, @address)", _sqlConnection);
+                var sqlcommand = new SqlCommand(cmdText: "exec SP_InsertEmployee @name,@age,@department,@address", _sqlConnection);
 
                 sqlcommand.Parameters.AddWithValue("name", employee.Name);
                 sqlcommand.Parameters.AddWithValue("age", employee.Age);
@@ -117,7 +117,7 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 _sqlConnection.Open();
 
-                var sqlcommand = new SqlCommand(cmdText: "update Employee set Name=@name, Age=@age, Department=@department, Address=@address where Id=@id", _sqlConnection);
+                var sqlcommand = new SqlCommand(cmdText: "exec SP_UpdateEmployee @id,@name,@age,@department,@address", _sqlConnection);
 
                 sqlcommand.Parameters.AddWithValue("id", employee.Id);
                 sqlcommand.Parameters.AddWithValue("name", employee.Name);

@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    bindEvents();
+    bindEvents();    
     hideEmployeeDetailCard();
 });
 
-function bindEvents() {
+function bindEvents() {    
     $(".employeeDetails").on("click", function (event) {
         var employeeId = event.currentTarget.getAttribute("data-id");
 
@@ -20,8 +20,8 @@ function bindEvents() {
                                          <b>Address:</b><p>${result.address}</p>
                                         </div>`
 
-                $("#EmployeeCard").html(newEmployeeCard);
-                showEmployeeDetailCard();
+                $("#EmployeeCard").html(newEmployeeCard).toggle();
+                //showEmployeeDetailCard();
             },
             error: function (error) {
                 console.log(error);

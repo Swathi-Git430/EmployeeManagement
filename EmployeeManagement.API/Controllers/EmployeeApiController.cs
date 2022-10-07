@@ -18,7 +18,7 @@ namespace EmployeeManagement.API.Controllers
 
         public EmployeeApiController(IEmployeeService employeeService)
         {
-            this._employeeService = employeeService;
+            _employeeService = employeeService;
         }
 
         [HttpGet]

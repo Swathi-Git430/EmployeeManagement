@@ -15,7 +15,7 @@ namespace EmployeeManagement.UI.Controllers
 
         public EmployeeController(IEmployeeApiClient employeeApiClient)
         {
-            this._employeeApiClient = employeeApiClient;
+            _employeeApiClient = employeeApiClient;
         }
 
         public IActionResult Index()
@@ -29,18 +29,6 @@ namespace EmployeeManagement.UI.Controllers
             {
                 throw;
             }
-        }
-
-       /* public IActionResult UpdateEmployee(EmployeeDetailedViewModel updateEmployee)
-        {
-            return View();
-        }
-
-        [HttpPut]
-        public IActionResult UpdateEmployee(EmployeeDetailedViewModel updateEmployee)
-        {
-            var updatedEmployee = _employeeApiClient.UpdateEmployee(updateEmployee);
-            return View(updatedEmployee);
-        }*/
+        }       
     }
 }
